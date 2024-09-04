@@ -45,6 +45,50 @@ class DashboardModel extends Model
     protected $afterDelete    = [];
 
 
+    public function checkProfileSetup($userId)
+    {
+        // Your logic to check if the user's profile is set up
+        // Return true if profile is set up, false otherwise
+        $db = \Config\Database::connect();
+
+        $builder = $db->table('profile');
+        $builder->select("*");
+        $builder->where('user_id', $userId);
+        $user_profile = $builder->get()->getRow();
+        
+        if($user_profile){
+            return true; //$user_profile->user_id;
+        }return false;
+    }
+
+    public function check_profile_setup(){
+        $db = \Config\Database::connect();
+
+        $builder = $db->table('profile');
+        $builder->select("*");
+        $builder->where('user_id', auth()->id());
+        $user_profile = $builder->get()->getRow();
+        
+        if($user_profile){
+            return $user_profile->user_id;
+        }return false;
+    }
+
+    public function get_image(){
+        $db = \Config\Database::connect();
+
+        $builder = $db->table('profile');
+        $builder->select('passport_image');
+        $builder->where('user_id', auth()->id());
+        if(!empty($builder->get()->getResultArray())){
+            return $builder->get()->getRow()->passport_image;
+        }else{
+            return false;
+            // exit("paused");
+        }
+        // return $builder->get()->getRow()->passport_image;
+    }
+
     public function add_withdrawal($withdrawal_data){
         $db = \Config\Database::connect();
 

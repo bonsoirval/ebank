@@ -1,5 +1,6 @@
 <?php
 
+defined('UPLOADPATH') || define('UPLOADPATH', 'SYSTEMPATH');
 /*
  | --------------------------------------------------------------------
  | App Namespace

@@ -27,10 +27,18 @@ $routes->post('/withdrawals', 'Dashboard::withdrawals');
 $routes->post('/change_password', 'Dashboard::change_password', ['as' => 'change_password']);
 $routes->get('/change_password', 'Dashboard::change_password');
 
+// initial profile update
+$routes->get('/profile_setup', 'Dashboard::profile_setup');
+$routes->post('/profile_setup', 'Dashboard::profile_setup');
+
 
 // profile
 $routes->get('/profile', 'Dashboard::profile');
 $routes->post('/profile', 'Dashboard::profile');
+
+// profile update
+$routes->get('/profile_update', 'Dashboard::profile_update');
+$routes->post('/profile_update', 'Dashboard::profile_update');
 
 // deposits
 $routes->get('/deposits', 'Dashboard::deposits');
@@ -41,6 +49,6 @@ $routes->get('/settings', 'Dashboard::settings');
 $routes->post('/settings', 'Dashboard::settings');
 
 $routes->post('/dashboard/', 'Dashboard::index');
-$routes->get('/dashboard/index', "Dashboard::index");
+$routes->get('/dashboard/index', "Dashboard::index",['as' => 'home']);
 
 service('auth')->routes($routes);

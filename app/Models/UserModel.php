@@ -14,11 +14,11 @@ class UserModel extends ShieldUserModel
 
         $this->allowedFields = [
             ...$this->allowedFields,
-            'name', // added
-            'phone', // added
-            'passport', // added
-            'address', // added
-            'dob', // added
+            // 'name', // added
+            // 'phone', // added
+            // 'passport', // added
+            // 'address', // added
+            // 'dob', // added
             // 'first_name',
         ];
     }

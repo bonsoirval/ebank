@@ -12,6 +12,7 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\PageCache;
 use CodeIgniter\Filters\PerformanceMetrics;
 use CodeIgniter\Filters\SecureHeaders;
+use App\Filters\CheckProfileSetup;
 
 class Filters extends BaseFilters
 {
@@ -34,6 +35,7 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'CheckProfileSetup' => CheckProfileSetup::class,
     ];
 
     /**
@@ -72,6 +74,8 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+            // Other global filters
+            'CheckProfileSetup' => ['except' => ['login', 'register', 'profile_setup', 'logout']]
         ],
         'after' => [
             // 'honeypot',
@@ -104,4 +108,5 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [];
+        // 'CheckProfileSetup' => ['after' => ['login']]
 }

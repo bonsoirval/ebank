@@ -74,7 +74,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?= base_url(); ?>dashboard/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="<?= base_url(); ?>/dashboard/img/users/<?= $image; ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block"><?= ucfirst(auth()->user()->name); ?></a>
@@ -152,12 +152,12 @@
                   <p>Profile</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="<?= base_url('settings'); ?>" class="nav-link">
+              <!-- <li class="nav-item">
+                <a href="< ?= base_url('settings'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Settings</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
           <li class="nav-item">

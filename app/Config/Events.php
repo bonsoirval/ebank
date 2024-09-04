@@ -5,6 +5,7 @@ namespace Config;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
 use CodeIgniter\HotReloader\HotReloader;
+use App\Libraries;
 
 /*
  * --------------------------------------------------------------------
@@ -56,8 +57,18 @@ Events::on('pre_system', static function () {
 
 
 
+// Events::on('login', 'App\Libraries\Profile::sum');
 
 Events::on('register', function (){
+        $model = model('DashboardModel');
+        $check_profile_setup = $model->check_profile_setup();
+        
+        if(!$check_profile_setup){
+            exit(var_dump('stop here'));
+        }else{
+            exit('nothing');
+        }
+
         echo "Registration done and dusted";
         exit("Registration done and dusted");
 

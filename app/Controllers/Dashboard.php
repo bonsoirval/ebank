@@ -11,11 +11,11 @@ class Dashboard extends BaseController
 {
     protected $helpers = ['form'];
 
-    public function __construct()
-    {
-        $sum = New Profile();
-		$sum->sum();
-    }
+    // public function __construct()
+    // {
+    //     $sum = New Profile();
+	// 	$sum->sum();
+    // }
     
     public function profile_setup()
     {
@@ -23,7 +23,7 @@ class Dashboard extends BaseController
         $model = model('DashboardModel');
 
         $data['title'] = 'Profile Update';
-        $data['name'] = auth()->user()->name;
+        $data['name'] = 'you and you'; // auth()->user()->name;
         $data['firstname'] = array('placeholder' => 'Enter first name', 'type' => "text", 'name' => "firstname", 'id' => "firstname", 'class' => "form-control", 'required' => 'required');
         $data['lastname'] = array('placehoder' => 'Enter last name', 'type' => "text", 'name' => "lastname", 'id' => "lastname", 'class' => "form-control", 'required' => 'required');
         $data['date_of_birth'] = array('placeholder' => 'Enter date of birth', 'type'=>"date", 'name'=>"date_of_birth", 'id' => "date_of_birth",'class' =>"form-control", 'required' => "required");
@@ -34,7 +34,7 @@ class Dashboard extends BaseController
 
         if($request->getPost()){
             if (!$this->validateData($request->getPost(), 'profile_setup')) {
-                exit("No validation");
+                // exit("No validation");
                 return view('dashboard/partials/header', $data)
                         .view('dashboard/profile_setup', $data)
                         .view('dashboard/partials/footer', $data);
@@ -89,11 +89,15 @@ class Dashboard extends BaseController
                     $profile['passport_image'] = auth()->id() . "." .$ext;
                 }
         
-                
                 $builder = $db->table('profile');
-                $builder->insert($profile);
+                $builder->select('user_id', auth()->id()); // confirm the user is not existing already
+                if($builder->get()->getResultArray() == true){
+                    return redirect()->to('dashboard/index'); // the user profile already update. Redirect to homepage
 
-                return url_to('home');
+                }else{
+                    $builder->insert($profile);
+                    return redirect()->to('dashboard/index'); // redirect to homepage
+                }
             }
         }else{
 
